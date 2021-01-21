@@ -13,7 +13,7 @@ package com.finddreams.module_base.utils.eventbus.wrapper;
 
 import android.os.Looper;
 
-import com.finddreams.module_base.utils.eventbus.factory.BusFactory;
+import com.finddreams.module_base.utils.eventbus.factory.BroadcastManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -57,8 +57,8 @@ final public class LiveEventWrapper<T> {
             runnable.run();
         } else {
             // 主线程中观察
-            BusFactory
-                .ready()
+            BroadcastManager
+                .getInstance()
                 .getMainHandler()
                 .post(runnable);
         }
@@ -109,7 +109,7 @@ final public class LiveEventWrapper<T> {
     }
 
     public void observeForever(@NonNull final ObserverWrapper<T> observer) {
-        observer.sequence = mSequence++;
+        observer.sequence = observer.mIsSticky ? -1 : mSequence++;
         checkThread(new Runnable() {
             @Override
             public void run() {
@@ -121,8 +121,8 @@ final public class LiveEventWrapper<T> {
     /**
      * 设置监听之前发送的消息也可以接受到
      */
-    public void observeAny(@NonNull LifecycleOwner owner, @NonNull ObserverWrapper<T> observer) {
-        observer.sequence = -1;
+    public void observeSticky(@NonNull LifecycleOwner owner, @NonNull ObserverWrapper<T> observer) {
+        observer.mIsSticky = true;
         observe(owner, observer);
     }
 
@@ -130,7 +130,7 @@ final public class LiveEventWrapper<T> {
      * 设置监听之前发送的消息不可以接受到
      */
     public void observe(@NonNull final LifecycleOwner owner, @NonNull final ObserverWrapper<T> observer) {
-        observer.sequence = mSequence++;
+        observer.sequence = observer.mIsSticky ? -1 : mSequence++;
         checkThread(new Runnable() {
             @Override
             public void run() {

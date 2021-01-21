@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.finddreams.module_base.base.BaseFragment;
 import com.finddreams.module_base.utils.RouteUtils;
-import com.finddreams.module_base.utils.eventbus.factory.BusFactory;
+import com.finddreams.module_base.utils.eventbus.factory.BroadcastManager;
 import com.finddreams.module_base.utils.eventbus.wrapper.ObserverWrapper;
 
 import androidx.annotation.Nullable;
@@ -31,7 +31,7 @@ public class ShoppingCartMainFragment extends BaseFragment {
         View rootView = inflater.inflate(R.layout.shoppingcart_fragment_main, null);
         initView(rootView);
 
-        BusFactory.ready().create("event").observe(this, new ObserverWrapper<Object>() {
+        BroadcastManager.getInstance().create("event").observeSticky(this, new ObserverWrapper<Object>() {
             @Override
             public void onChanged(@Nullable Object o) {
                 if (o instanceof Intent) {
@@ -53,6 +53,5 @@ public class ShoppingCartMainFragment extends BaseFragment {
                 RouteUtils.startGoodDetailActivity(goodName);
             }
         });
-
     }
 }

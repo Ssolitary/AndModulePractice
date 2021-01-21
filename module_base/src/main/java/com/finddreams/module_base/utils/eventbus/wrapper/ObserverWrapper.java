@@ -20,6 +20,7 @@ import androidx.lifecycle.Observer;
  */
 public abstract class ObserverWrapper<T> {
     int sequence;
+    boolean mIsSticky = false;
     Observer<ValueWrapper<T>> observer;
 
     public abstract void onChanged(@Nullable T t);

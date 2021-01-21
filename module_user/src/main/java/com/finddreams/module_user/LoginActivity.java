@@ -8,7 +8,7 @@ import android.widget.Button;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.finddreams.module_base.base.BaseActivity;
 import com.finddreams.module_base.utils.RouteUtils;
-import com.finddreams.module_base.utils.eventbus.factory.BusFactory;
+import com.finddreams.module_base.utils.eventbus.factory.BroadcastManager;
 
 /**
  * Created by lx on 17-10-25.
@@ -49,7 +49,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         } else if (id == R.id.bt_login_fail) {
             intent.setAction("登录失败");
         }
-        BusFactory.ready().create("event").setValue(intent);
+        BroadcastManager.getInstance().create("event").setValue(intent);
         finish();
     }
 }

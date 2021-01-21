@@ -10,18 +10,22 @@ import java.util.HashMap;
 
 import androidx.annotation.NonNull;
 
-public class BusFactory {
-    private static final BusFactory sInstance = new BusFactory();
-    private final Object mLock = new Object();
-    HashMap<String, LiveEventWrapper<Object>> eventBus;
+public class BroadcastManager {
+    private static BroadcastManager instance;
+    private Object mLock;
+    private HashMap<String, LiveEventWrapper<Object>> mEventMap;
     private volatile Handler mMainHandler;
 
-    private BusFactory() {
-        eventBus = new HashMap<>();
+    private BroadcastManager() {
+        mLock = new Object();
+        mEventMap = new HashMap<>();
     }
 
-    public static BusFactory ready() {
-        return sInstance;
+    public static BroadcastManager getInstance() {
+        if (instance == null) {
+            instance = new BroadcastManager();
+        }
+        return instance;
     }
 
     private static Handler createAsync(@NonNull Looper looper) {
@@ -32,10 +36,10 @@ public class BusFactory {
     }
 
     public LiveEventWrapper<Object> create(String event) {
-        if (!eventBus.containsKey(event)) {
-            eventBus.put(event, new LiveEventWrapper());
+        if (!mEventMap.containsKey(event)) {
+            mEventMap.put(event, new LiveEventWrapper());
         }
-        return eventBus.get(event);
+        return mEventMap.get(event);
     }
 
     public Handler getMainHandler() {
