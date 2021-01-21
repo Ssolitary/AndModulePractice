@@ -1,5 +1,6 @@
 package com.finddreams.shoppingcart;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,12 +10,9 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.finddreams.module_base.base.BaseFragment;
-import com.finddreams.module_base.event.LoginStateEvent;
 import com.finddreams.module_base.utils.RouteUtils;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
+import com.finddreams.module_base.utils.eventbus.factory.BusFactory;
+import com.finddreams.module_base.utils.eventbus.wrapper.ObserverWrapper;
 
 import androidx.annotation.Nullable;
 
@@ -32,7 +30,15 @@ public class ShoppingCartMainFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.shoppingcart_fragment_main, null);
         initView(rootView);
-        EventBus.getDefault().register(this);
+
+        BusFactory.ready().create("event").observe(this, new ObserverWrapper<Object>() {
+            @Override
+            public void onChanged(@Nullable Object o) {
+                if (o instanceof Intent) {
+                    tv_loginstate.setText(((Intent) o).getAction());
+                }
+            }
+        });
         return rootView;
     }
 
@@ -48,12 +54,5 @@ public class ShoppingCartMainFragment extends BaseFragment {
             }
         });
 
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onLoginSuccess(LoginStateEvent event) {
-        if (event.isSuccess) {
-            tv_loginstate.setText("已登录");
-        }
     }
 }

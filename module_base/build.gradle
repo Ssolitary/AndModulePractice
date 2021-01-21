@@ -34,7 +34,6 @@ dependencies {
     implementation project(':lib_pay')
     implementation project(':lib_share')
     api "com.alibaba:arouter-api:$rootProject.arouterVersion"
-    api 'org.greenrobot:eventbus:3.0.0'
 
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

@@ -1,15 +1,14 @@
 package com.finddreams.module_user;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.finddreams.module_base.base.BaseActivity;
-import com.finddreams.module_base.event.LoginStateEvent;
 import com.finddreams.module_base.utils.RouteUtils;
-
-import org.greenrobot.eventbus.EventBus;
+import com.finddreams.module_base.utils.eventbus.factory.BusFactory;
 
 /**
  * Created by lx on 17-10-25.
@@ -44,11 +43,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 //                break;
 //        }
         int id = view.getId();
+        Intent intent = new Intent();
         if (id == R.id.bt_login_success) {
-            EventBus.getDefault().post(new LoginStateEvent(true));
+            intent.setAction("登录成功");
         } else if (id == R.id.bt_login_fail) {
-            EventBus.getDefault().post(new LoginStateEvent(false));
+            intent.setAction("登录失败");
         }
+        BusFactory.ready().create("event").setValue(intent);
         finish();
     }
 }
