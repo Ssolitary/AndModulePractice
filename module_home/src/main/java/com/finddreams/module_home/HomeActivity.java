@@ -1,11 +1,6 @@
 package com.finddreams.module_home;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -13,25 +8,25 @@ import android.widget.RadioGroup;
 import com.finddreams.module_base.base.BaseActivity;
 import com.finddreams.module_base.utils.RouteUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 /**
  * Created by lx on 17-10-24.
  */
 
 public class HomeActivity extends BaseActivity {
-    //    @BindView(R2.id.ll_main)
+    public static final String TAG_FRAGMENT_HOME = "home";
+    public static final String TAG_FRAGMENT_FIND = "find";
+    public static final String TAG_FRAGMENT_CART = "cart";
+    public static final String TAG_FRAGMENT_USER = "user";
     FrameLayout llMain;
-    //    @BindView(R2.id.rb_home)
     RadioButton rbHome;
-    //    @BindView(R2.id.rb_find)
     RadioButton rbFind;
-    //    @BindView(R2.id.rb_shoppingcart)
     RadioButton rbShoppingcart;
-    //    @BindView(R2.id.rb_user)
     RadioButton rbUser;
-    //    @BindView(R2.id.rg_tab)
     RadioGroup rgTab;
     private Fragment curFragment;
     private FragmentManager supportFragmentManager;
@@ -39,16 +34,11 @@ public class HomeActivity extends BaseActivity {
     private Fragment findFragment;
     private Fragment shoppingcartFragment;
     private Fragment userFragment;
-    public static final String TAG_FRAGMENT_HOME="home";
-    public static final String TAG_FRAGMENT_FIND="find";
-    public static final String TAG_FRAGMENT_CART="cart";
-    public static final String TAG_FRAGMENT_USER="user";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
-        ButterKnife.bind(this);
         supportFragmentManager = getSupportFragmentManager();
         initView();
 
@@ -59,7 +49,7 @@ public class HomeActivity extends BaseActivity {
         rbFind = findViewById(R.id.rb_find);
         rbShoppingcart = findViewById(R.id.rb_shoppingcart);
         rbUser = findViewById(R.id.rb_user);
-        rgTab=findViewById(R.id.rg_tab);
+        rgTab = findViewById(R.id.rg_tab);
         // 底部tab切换监听
         rgTab.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

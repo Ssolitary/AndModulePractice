@@ -1,2 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.finddreams.lib_share" />
+<manifest package="com.finddreams.lib_share" />

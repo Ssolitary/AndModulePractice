@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main_tab_activity"
+<RelativeLayout android:id="@+id/main_tab_activity"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -17,8 +17,8 @@
         android:id="@+id/rg_tab"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:background="@drawable/home_tab_bg"
         android:layout_alignParentBottom="true"
+        android:background="@drawable/home_tab_bg"
         android:orientation="horizontal">
 
         <RadioButton
@@ -28,9 +28,9 @@
             android:layout_weight="1"
             android:button="@null"
             android:checked="true"
-            android:paddingTop="5dp"
             android:drawableTop="@drawable/home_tab_home"
             android:gravity="center_horizontal"
+            android:paddingTop="5dp"
             android:textSize="11dp" />
 
         <RadioButton
@@ -39,9 +39,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:button="@null"
+            android:drawableTop="@drawable/home_tab_find"
             android:gravity="center_horizontal"
             android:paddingTop="5dp"
-            android:drawableTop="@drawable/home_tab_find"
             android:textSize="11dp" />
 
         <RadioButton
@@ -50,10 +50,10 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:button="@null"
-            android:paddingTop="5dp"
             android:drawableTop="@drawable/home_tab_shoppingcart"
-
             android:gravity="center_horizontal"
+
+            android:paddingTop="5dp"
             android:textSize="11dp" />
 
         <RadioButton
@@ -62,9 +62,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:button="@null"
-            android:paddingTop="5dp"
             android:drawableTop="@drawable/home_tab_user"
             android:gravity="center_horizontal"
+            android:paddingTop="5dp"
             android:textSize="11dp" />
     </RadioGroup>
 </RelativeLayout>

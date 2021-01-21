@@ -10,7 +10,7 @@ public class ModuleRouteService {
     public static String getUserAddress(String userId) {
         IUserModuleService userModuleService = ARouter.getInstance().navigation(IUserModuleService.class);
         if (userModuleService != null) {
-           return userModuleService.getUserAddress(userId);
+            return userModuleService.getUserAddress(userId);
         }
         return "";
     }

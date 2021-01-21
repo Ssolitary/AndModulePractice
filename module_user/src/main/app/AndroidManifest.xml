@@ -1,5 +1,5 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.finddreams.module_user">
+<manifest package="com.finddreams.module_user"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application>
         <activity

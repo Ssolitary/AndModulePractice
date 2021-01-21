@@ -1,7 +1,6 @@
 package com.finddreams.module_home;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +8,8 @@ import android.view.ViewGroup;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.finddreams.module_base.base.BaseFragment;
 import com.finddreams.module_base.utils.RouteUtils;
+
+import androidx.annotation.Nullable;
 
 /**
  * Created by lx on 17-10-24.

@@ -5,12 +5,13 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_cart"
+    <Button
+        android:id="@+id/bt_goto_gooddetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tv_goodname"
         android:layout_centerHorizontal="true"
-        android:text="购物车" />
+        android:text="跳转到商品详情" />
 
     <TextView
         android:id="@+id/tv_goodname"
@@ -20,13 +21,13 @@
         android:layout_centerHorizontal="true"
         android:text="商品:iPhoneX" />
 
-    <Button
-        android:id="@+id/bt_goto_gooddetail"
+    <TextView
+        android:id="@+id/tv_cart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_goodname"
         android:layout_centerHorizontal="true"
-        android:text="跳转到商品详情" />
+        android:text="购物车" />
+
     <TextView
         android:id="@+id/tv_loginstate"
         android:layout_width="wrap_content"

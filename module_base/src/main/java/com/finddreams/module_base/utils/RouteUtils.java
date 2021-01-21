@@ -1,8 +1,8 @@
 package com.finddreams.module_base.utils;
 
-import android.support.v4.app.Fragment;
-
 import com.alibaba.android.arouter.launcher.ARouter;
+
+import androidx.fragment.app.Fragment;
 
 /**
  * Created by lx on 17-10-24.
@@ -23,14 +23,17 @@ public class RouteUtils {
         Fragment fragment = (Fragment) ARouter.getInstance().build(Find_Fragment_Main).navigation();
         return fragment;
     }
+
     public static Fragment getUserFragment() {
         Fragment fragment = (Fragment) ARouter.getInstance().build(User_Fragment_Main).navigation();
         return fragment;
     }
+
     public static Fragment getHomeFragment() {
         Fragment fragment = (Fragment) ARouter.getInstance().build(Home_Fragment_Main).navigation();
         return fragment;
     }
+
     public static Fragment getShoppingCartFragment() {
         Fragment fragment = (Fragment) ARouter.getInstance().build(ShoppingCart_Fragment_Main).navigation();
         return fragment;
@@ -38,11 +41,13 @@ public class RouteUtils {
 
     /**
      * 跳转到商品详情的页面
+     *
      * @param goodName
      */
     public static void startGoodDetailActivity(String goodName) {
-        ARouter.getInstance().build(GoodDetail_Activity_Main).withString("goodName",goodName).navigation();
+        ARouter.getInstance().build(GoodDetail_Activity_Main).withString("goodName", goodName).navigation();
     }
+
     public static void startLoginActivity() {
         ARouter.getInstance().build(User_Activity_Login).navigation();
     }
