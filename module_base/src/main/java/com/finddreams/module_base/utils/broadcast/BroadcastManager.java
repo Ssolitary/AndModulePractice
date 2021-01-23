@@ -1,24 +1,25 @@
-package com.finddreams.module_base.utils.eventbus.factory;
+package com.finddreams.module_base.utils.broadcast;
 
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.finddreams.module_base.utils.eventbus.wrapper.LiveEventWrapper;
+import com.finddreams.module_base.utils.broadcast.wrappers.ChannelWrapper;
 
 import java.util.HashMap;
 
-import androidx.annotation.NonNull;
-
 public class BroadcastManager {
+
     private static BroadcastManager instance;
-    private Object mLock;
-    private HashMap<String, LiveEventWrapper<Object>> mEventMap;
+    private final HashMap<String, ChannelWrapper<Object>> mChannelMap;
+    private final Object mLock;
+    // http://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html
+    // Fixing Double-Checked Locking using volatile
     private volatile Handler mMainHandler;
 
     private BroadcastManager() {
         mLock = new Object();
-        mEventMap = new HashMap<>();
+        mChannelMap = new HashMap<>();
     }
 
     public static BroadcastManager getInstance() {
@@ -28,20 +29,21 @@ public class BroadcastManager {
         return instance;
     }
 
-    private static Handler createAsync(@NonNull Looper looper) {
-        if (Build.VERSION.SDK_INT >= 28) {
+    private static Handler createAsync(Looper looper) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             return Handler.createAsync(looper);
         }
         return new Handler(looper);
     }
 
-    public LiveEventWrapper<Object> create(String event) {
-        if (!mEventMap.containsKey(event)) {
-            mEventMap.put(event, new LiveEventWrapper());
+    public ChannelWrapper<Object> getChannel(String channel) {
+        if (!mChannelMap.containsKey(channel)) {
+            mChannelMap.put(channel, new ChannelWrapper<>());
         }
-        return mEventMap.get(event);
+        return mChannelMap.get(channel);
     }
 
+    // http://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html
     public Handler getMainHandler() {
         if (mMainHandler == null) {
             synchronized (mLock) {
